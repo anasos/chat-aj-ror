@@ -1,0 +1,10 @@
+<div class="col-md-4">
+    <h3>{{$ctrl.topic.name}}</h3>
+    <img ng-src="{{$ctrl.mainImageUrl}}">
+</div>
+
+<div class="col-md-8">
+    <div class="col-md-2" ng-repeat="image in $ctrl.topic.images">
+        <img src="{{image}}" style="background-size: cover; height: 100px" ng-mouseover="$ctrl.setImage(image)">
+    </div>
+</div>

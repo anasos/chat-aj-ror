@@ -1,0 +1,30 @@
+development:
+  adapter: postgresql
+  database: untitled
+  host: 127.0.0.1
+  port: 5432
+  pool: 25
+  timeout: 5000
+  username: geeksters
+  password: geeksters
+
+test:
+  adapter: postgresql
+  database: untitled
+  host: 127.0.0.1
+  port: 5432
+  pool: 25
+  timeout: 5000
+  username: geeksters
+  password: geeksters
+
+production:
+  # url: postgres://npaisqbzoqenro:Y2-7RlkrYjarzD2hpocFGPuz1l@ec2-54-75-233-22.eu-west-1.compute.amazonaws.com:5432/d5aj2ur2mvp2ug
+  adapter: postgresql
+  database: untitled
+  host: 127.0.0.1
+  port: 5432
+  pool: 25
+  timeout: 5000
+  username: geeksters
+  password: geeksters

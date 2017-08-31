@@ -1,0 +1,25 @@
+<div class="col-md-6">
+    Search: <input ng-model="filterName" />
+</div>
+
+<div class="col-md-6">
+    Sort by:
+    <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="price">Price</option>
+    </select>
+</div>
+
+<div class="clearfix"></div>
+
+<md-card ng-repeat = "topic in $ctrl.topics | filter:filterName | orderBy:orderProp" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch >
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline"><a href="#!/topic/{{topic.id}}" class="thumb">{{topic.name}}</a></span>
+            <span class="md-subhead">{{topic.snippet}}</span>
+        </md-card-title-text>
+        <md-card-title-media>
+            <div class="md-media-lg card-media" style="background-image: url('http://www.ouest-france.fr/sites/default/files/styles/image-640x360/public/2017/04/24/football-madrid-lionel-messi-continue-d-ecrire-sa-legende.jpg?itok=jrAshrVr')">Price : {{topic.price}}</div>
+        </md-card-title-media>
+    </md-card-title>
+</md-card>

@@ -1,0 +1,28 @@
+{
+  "name": "dsl-generated-dependencies",
+  "dependencies": {
+    "angular": "latest",
+    "bootstrap-sass-official": "latest",
+    "angular-route": "latest",
+    "angular-resource": "latest",
+    "angular-mocks": "latest",
+    "angular-local-storage": "latest",
+    "jquery": "latest",
+    "angular-file-upload": "latest",
+    "angular-material": "latest",
+    "angular-sanitize": "latest",
+    "angular-ui-select": "latest",
+    "malihu-custom-scrollbar-plugin": "latest",
+    "ng-scrollbars": "latest",
+    "moment": "latest",
+    "angular-animate": "latest",
+    "angular-aria": "latest",
+    "angular-messages": "latest",
+    "indrimuska-angular-moment-picker": "latest",
+    "angular-ellipsis": "latest",
+    "ngdropzone": "latest",
+    "angular-timezone-selector": "latest",
+    "ng-lodash": "latest",
+    "ng-country-select": "latest"
+  }
+}
