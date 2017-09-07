@@ -10,6 +10,7 @@ component('conversationShow', {
             var conversations = localStorage.getObj(App.storage.conversations);
             if( !(this.conversations instanceof Array) ) this.conversations = [];
             this.topic = Conversation.getCurrentTopic();
+            $scope.$Message = Message;
 
             self.enableEdit = function enableEdit() {
                 this.editing = true;

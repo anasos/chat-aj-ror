@@ -5,4 +5,5 @@ class Conversation < ActiveRecord::Base
                   :join_table => 'conversations_users',
                   :foreign_key => 'conversation_id',
                   :association_foreign_key => 'user_id'
+  belongs_to :owner, class_name: 'User', :foreign_key => 'user_id'
 end

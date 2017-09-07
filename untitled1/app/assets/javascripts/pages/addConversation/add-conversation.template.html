@@ -4,9 +4,8 @@
     <label name="subject">Subject</label>
     <input type="text" ng-model="newConversation.conversation['subject']" name="conversation[subject]">
     <label name="Recipients">Recipients</label>
-    {{$ctrl.users.size}}
-    <select multiple ng-repeat="user in $ctrl.users">
-        <option>
+    <select multiple ng-model="newConversation.conversation['recipient_ids']" name="conversation[recipient_ids]">
+        <option ng-repeat="user in $users" value={{user.id}}>
             {{user.email}}
         </option>
     </select>

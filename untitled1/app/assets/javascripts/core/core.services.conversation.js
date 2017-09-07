@@ -9,15 +9,20 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
             topic : {},
 
             create : function(serviceOptions, onSuccessCallback, onErrorCallback) {
-
+                debugger;
                 var conversation = Object.assign( {}, serviceOptions.conversation );
 
                 var onSuccess = function(resData) {
 
                     console.log("Success ");
                     var conversations = storageService.getObj(App.storage.conversations);
-                    conversations[Object.keys(conversations).length] = conversation;
+                    var belongs_conversations = storageService.getObj(App.storage.belongs_conversations);
+                    if( !(conversations instanceof Array) ) conversations = [];
+                    if( !(belongs_conversations instanceof Array) ) belongs_conversations = [];
+                    conversations[Object.keys(conversations).length] = resData.conversation;
+                    belongs_conversations[Object.keys(belongs_conversations).length] = resData.conversation;
                     storageService.storeObj(App.storage.conversations, conversations);
+                    storageService.storeObj(App.storage.belongs_conversations, belongs_conversations);
 
                     // Call onSucces callback
                     if( typeof onSuccessCallback == "function" )
@@ -38,7 +43,7 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
                     requireAuth: false,
                 };
 
-                httpService.call(options, conversation, onSuccess, onError);
+                httpService.call(options, { conversation : conversation }, onSuccess, onError);
             },
 
             update : function(serviceOptions, onSuccessCallback, onErrorCallback) {
@@ -86,10 +91,12 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
             refreshConversationsList : function(onSuccessCallback, onErrorCallback) {
 
                 var onSuccess = function(response) {
-
-                    console.log("Success get list ");
-
-                    storageService.storeObj( App.storage.conversations, response );
+                    var conversations = storageService.getObj(App.storage.conversations);
+                    debugger;
+                    if( !(conversations instanceof Array) ) conversations = [];
+                    conversations = response.conversations;
+                    storageService.storeObj( App.storage.conversations, conversations);
+                    storageService.storeObj( App.storage.belongs_conversations, response.belongs_conversations );
 
                     // Call onSucces callback
                     if( typeof onSuccessCallback == "function" )
@@ -117,9 +124,8 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
                     var conversations = storageService.getObj(App.storage.conversations);
                     if( !(this.conversations instanceof Array) ) this.conversations = [];
                     this.topic = conversations.filter((c) => c.id === conversationId)[0];
-                    var self = this
+                    var self = this;
 
-                    if ( this.topic.messages == null ){
                         var onSuccess = function(resData) {
                         var conversations = storageService.getObj(App.storage.conversations);
                         var conversationIndex = conversations.findIndex( obj => obj.id == conversationId );
@@ -149,15 +155,6 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
                         };
 
                         httpService.call(options, {}, onSuccess, onError);
-                    }
-                    else{
-                        var conversations = storageService.getObj(App.storage.conversations);
-                        var conversationIndex = conversations.findIndex( obj => obj.id == conversationId );
-                        if( conversationIndex > -1 ) {
-                            self.topic = conversations[conversationIndex];
-                            $rootScope.$broadcast("app:current-topic-change", self.topic);
-                        }
-                    }
 
             },
 

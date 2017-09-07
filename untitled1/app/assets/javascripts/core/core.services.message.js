@@ -15,6 +15,7 @@ messageServices.factory('Message',['httpService', 'storageService', '$rootScope'
                 var onSuccess = function(resData) {
 
                     console.log("Success ");
+                    msg = resData;
                     var conversations = storageService.getObj(App.storage.conversations);
                     var conversation_index = conversations.findIndex( obj => obj.id == msg.conversation_id );
                     var msg_index = conversations[conversation_index].messages.length;
@@ -114,6 +115,13 @@ messageServices.factory('Message',['httpService', 'storageService', '$rootScope'
 
                 httpService.call(options,{}, onSuccess, onError);
             },
+
+            get_message_owner : function (messageUserId) {
+                var users = storageService.getObj(App.storage.users);
+                var self = this;
+                message_owner = users.filter((c) => c.id === messageUserId)[0];
+                return message_owner;
+            }
         };
     }]
 );

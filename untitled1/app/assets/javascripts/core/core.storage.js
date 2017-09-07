@@ -2,6 +2,10 @@ App.storage = {};
 
 App.storage.conversations = "Conversations";
 
+App.storage.belongs_conversations = "BelongsConversations";
+
+App.storage.own_conversations = "OwnConversations";
+
 App.storage.users = "users";
 
 App.storage.user = "User";

@@ -3,6 +3,6 @@
 </h1>
 <div>$ctrl.conversations.length : {{$ctrl.conversations.length}}</div>
 <div>{{$ctrl.test}}</div>
-<div ng-repeat="conversation in $ctrl.conversations">
+<div ng-repeat="conversation in $ctrl.belongs_conversations">
     <a href ng-click="$Conversation.getConversation(conversation.id)">{{conversation.subject}}</a>
 </div>

@@ -3,15 +3,16 @@ class ConversationsController < ApplicationController
   respond_to :json
 
   def create
-    if Conversation.create!(conversation_params)
-      render json: { status: 200 }, status: 200
+    conversation = Conversation.create!(conversation_params)
+    if conversation
+      render json: { status: 200, conversation: conversation }, status: 200
     else
       render json: { status: 400 }, status: 200
     end
   end
 
   def list
-    render json: Conversation.all.to_json
+    render json: { conversations: Conversation.all, belongs_conversations: current_user.conversations }
   end
 
   def update
@@ -23,12 +24,12 @@ class ConversationsController < ApplicationController
 
   def show
     conversation = Conversation.find(params[:id])
-    render json: conversation.messages, status: 200
+    render json: conversation.messages.to_json, status: 200
   end
 
   private
 
   def conversation_params
-    params.require(:conversation).permit(:subject)
+    params.require(:conversation).permit(:subject, :recipient_ids => [])
   end
 end

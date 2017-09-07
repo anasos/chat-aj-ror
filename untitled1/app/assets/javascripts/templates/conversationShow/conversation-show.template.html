@@ -3,7 +3,10 @@
     <h3>subject title: {{ $ctrl.topic.subject }}</h3>
         <span>messages</span>{{$ctrl.topic.messages.length}}
         <ul>
-            <li ng-repeat="message in $ctrl.topic.messages" ng-hide="message.content == null">{{message.content}}</li>
+            <div ng-repeat="message in $ctrl.topic.messages">
+                {{ $Message.get_message_owner(message.user_id).email}} :
+                <li ng-hide="message.content == null">{{message.content}}</li>
+            </div>
         </ul>
         <form ng-submit="addMessage()">
             <input type="textarea" ng-model="msg.message['content']">
