@@ -12,15 +12,6 @@ component('signIn', {
                 };
                 console.log(data);
                 var onSuccess = function() {
-                    // self.users = localStorage.getObj(App.storage.users);
-                    // if( !(self.conversations instanceof Array) ) self.conversations = [];
-                    //
-
-                    debugger
-                    User.refreshUsersList();
-                    self.users = User.getRecipients();
-
-                    debugger
                     $location.url('/');
                 };
 

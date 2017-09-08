@@ -1,17 +1,39 @@
 <menu-bar></menu-bar>
 
-<form name="addConversationForm" ng-submit="addConversation()">
-    <label name="subject">Subject</label>
-    <input type="text" ng-model="newConversation.conversation['subject']" name="conversation[subject]">
-    <label name="Recipients">Recipients</label>
-    <select multiple ng-model="newConversation.conversation['recipient_ids']" name="conversation[recipient_ids]">
-        <option ng-repeat="user in $users" value={{user.id}}>
-            {{user.email}}
-        </option>
-    </select>
-    <input type="submit" value="create">
-</form>
+<div class="layout">
+    <div flex="75">
+        <md-grid-list
+                md-cols-xs="12" md-cols-sm="12" md-cols-md="12" md-cols-gt-md="12"
+                md-row-height-gt-md="1:1" md-row-height="2:2"
+                md-gutter="12px" md-gutter-gt-sm="8px" >
 
-<conversations-list></conversations-list>
+            <form name="addConversationForm" ng-submit="addConversation()">
+                <md-content layout-padding>
+                    <div>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Subject</label>
+                            <input ng-model="newConversation.conversation['subject']" name="conversation[subject]">
+                        </md-input-container>
 
-<conversation-show></conversation-show>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Recipients</label>
+                            <md-select ng-model="newConversation.conversation['recipient_ids']" name="conversation[recipient_ids]" multiple>
+                                <md-option ng-repeat="user in $users" value={{user.id}}>
+                                    {{user.email}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-button type="submit" class="md-raised md-primary">Create</md-button>
+                    </div>
+                </md-content>
+            </form>
+        </md-grid-list>
+        <conversation-show></conversation-show>
+    </div>
+    <div flex="25">
+        <conversations-list></conversations-list>
+    </div>
+</div>
+
+

@@ -5,6 +5,7 @@ class ConversationsController < ApplicationController
   def create
     conversation = Conversation.create!(conversation_params)
     if conversation
+      conversation.update(user_id: current_user.id)
       render json: { status: 200, conversation: conversation }, status: 200
     else
       render json: { status: 400 }, status: 200

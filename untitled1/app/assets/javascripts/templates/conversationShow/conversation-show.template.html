@@ -1,25 +1,40 @@
+
 <div ng-hide="$ctrl.editing">
     <div ng-show="!angular.equals($ctrl.topic, {})">
-    <h3>subject title: {{ $ctrl.topic.subject }}</h3>
-        <span>messages</span>{{$ctrl.topic.messages.length}}
-        <ul>
-            <div ng-repeat="message in $ctrl.topic.messages">
-                {{ $Message.get_message_owner(message.user_id).email}} :
-                <li ng-hide="message.content == null">{{message.content}}</li>
-            </div>
-        </ul>
-        <form ng-submit="addMessage()">
-            <input type="textarea" ng-model="msg.message['content']">
-            <input type="submit" value="send">
-        </form>
-        <button ng-click="$ctrl.enableEdit()">update</button>
+
+        <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">{{ $ctrl.topic.subject }}</div>
+        </md-toolbar>
+
+        <md-content style="height: 600px;" md-theme="altTheme">
+
+            <section>
+                <md-list layout-padding>
+                    <md-list-item class="md-2-line" ng-repeat="message in $ctrl.topic.messages">
+                        <md-icon>face</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{$Message.get_message_owner(message.user_id).email}}</h3>
+                            <p>
+                                {{message.content}}
+                            </p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </section>
+
+            <form ng-submit="addMessage()">
+                <md-content layout-gt-sm="row" layout-padding>
+                    <div>
+                        <md-input-container>
+                            <label>send message</label>
+                            <input ng-model="msg.message['content']" type="textarea">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-button type="submit">Send</md-button>
+                    </div>
+                </md-content>
+            </form>
+        </md-content>
     </div>
 </div>
-<div ng-show="$ctrl.editing">
-    <form ng-submit="updateConversation()">
-        <input ng-model="conversation.conversation['subject']" value="{{$ctrl.topic.value}}" placeholder="subject">
-        <input type="submit" value="update">
-    </form>
-</div>
-
-

@@ -13,7 +13,6 @@ component('conversationsList', {
             if( !(this.belongs_conversations instanceof Array) ) this.belongs_conversations = [];
 
             Conversation.refreshConversationsList();
-            User.refreshUsersList();
             $scope.$Conversation = Conversation;
 
             $scope.$on("app:storage-change", function (event, args) {

@@ -31,6 +31,19 @@ usersServices.factory('authService', ['$auth', 'storageService', 'httpService', 
             $auth.submitLogin(data).then(onSuccess).catch(onError);
         },
 
+
+        logout : function() {
+
+            var onError = function() {
+                App.logging.debug("Error > usersServices - logout", arguments);
+            }
+
+            $auth.signOut().catch( onError );
+
+            storageService.clearUser(null);
+            storageService.clearAll();
+        },
+
         signUp : function(data, onSuccessCallback, onErrorCallback) {
             debugger
 
@@ -71,7 +84,6 @@ usersServices.factory('User', ['$auth', 'storageService', 'httpService', functio
         },
 
         refreshUsersList : function(onSuccessCallback, onErrorCallback) {
-
             var onSuccess = function(response) {
 
                 console.log("Success get users list ");
@@ -84,11 +96,7 @@ usersServices.factory('User', ['$auth', 'storageService', 'httpService', functio
             };
 
             var onError = function(error) {
-                // To do
-                //App.logging.debug(error);
-                // Call onError callback
-                if( typeof onErrorCallback == "function" )
-                    onErrorCallback.apply(null, arguments);
+                console.log('error user list');
             };
 
             var options = {

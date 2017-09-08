@@ -1,8 +1,12 @@
-<h1>
-    conversations List
-</h1>
-<div>$ctrl.conversations.length : {{$ctrl.conversations.length}}</div>
-<div>{{$ctrl.test}}</div>
-<div ng-repeat="conversation in $ctrl.belongs_conversations">
-    <a href ng-click="$Conversation.getConversation(conversation.id)">{{conversation.subject}}</a>
-</div>
+<md-content>
+    <md-list>
+        <md-list-item class="md-2-line" ng-repeat="conversation in $ctrl.belongs_conversations">
+            <md-icon>face</md-icon>
+            <div class="md-list-item-text">
+                <h3>{{$Conversation.get_owner(conversation.user_id).email}} {{conversation.user_id}}</h3>
+                <h4><a ng-click="$Conversation.getConversation(conversation.id)" href>{{conversation.subject}}</a></h4>
+            </div>
+            <md-divider md-inset ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

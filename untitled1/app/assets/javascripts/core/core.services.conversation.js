@@ -92,7 +92,6 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
 
                 var onSuccess = function(response) {
                     var conversations = storageService.getObj(App.storage.conversations);
-                    debugger;
                     if( !(conversations instanceof Array) ) conversations = [];
                     conversations = response.conversations;
                     storageService.storeObj( App.storage.conversations, conversations);
@@ -166,6 +165,13 @@ conversationServices.factory('Conversation',['httpService', 'storageService', '$
             refreshCurrentConversation : function ( conversation ) {
                 this.topic = conversation;
                 $rootScope.$broadcast("app:current-topic-change", this.topic);
+            },
+
+            get_owner : function (userId) {
+                var users = storageService.getObj(App.storage.users);
+                var self = this;
+                conversationOwner = users.filter((c) => c.id === userId)[0];
+                return conversationOwner;
             }
 
             // create: function(conversation) {

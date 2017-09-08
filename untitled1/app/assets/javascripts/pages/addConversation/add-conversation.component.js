@@ -5,10 +5,10 @@ component('addConversation', {
     controller: ['$location','$scope', 'Conversation', 'User',
         function AddConversationController($location , $scope, Conversation, User ) {
         var self = $(this);
-            $scope.$users = User.getRecipients();
+            User.refreshUsersList();
+            $scope.$users = [];
             Conversation.refreshConversationsList();
             $scope.addConversation = function() {
-                debugger;
                 conversation = Conversation.create($scope.newConversation);
                 $scope.newConversation = {};
             }
@@ -19,5 +19,18 @@ component('addConversation', {
                 if( !(this.conversations instanceof Array) ) this.conversations = [];
                 this.topic = conversations.filter((c) => c.id === conversationId)[0];
             };
+
+            $scope.$on("app:storage-change", function (event, args) {
+                console.log("OK");
+                if( args.key == App.storage.users ) $scope.$users = User.getRecipients();
+            });
         }]
+}).config(function($mdThemingProvider){
+
+    // Configure a dark theme with primary foreground yellow
+
+    $mdThemingProvider.theme('docs-dark', 'default')
+        .primaryPalette('yellow')
+        .dark();
+
 });

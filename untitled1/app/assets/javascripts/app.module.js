@@ -12,6 +12,7 @@ angular.module('topicApp', [
     'conversationServices',
     'messageServices',
     'userServices',
+    'ngMaterial',
     'storageModule',
     'ng-token-auth',
 ])

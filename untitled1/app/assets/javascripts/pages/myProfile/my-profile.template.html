@@ -1,3 +1,4 @@
+<menu-bar></menu-bar>
 <h3>My profile</h3>
 <hr>
 <label>
@@ -13,3 +14,14 @@
 <label>
     {{$user.email}}
 </label>
+
+<form>
+    <legend>Upload on form submit</legend>
+    Username: <input type="text" name="userName" ng-model="username" size="39" required="">
+    Profile Picture: <input type="file" ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" ng-change="updateProfilere()">
+    <br>
+
+    <button ng-click="updateProfile(picFile)">Submit</button>
+</form>
+
+<input type="file" name="file" onchange="angular.element(this).scope().uploadFiler(this.files)"/>
